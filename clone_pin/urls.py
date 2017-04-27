@@ -13,10 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url,include
+from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^', include('modules.landing.urls',namespace="landing")),
-]
+                  url(r'^admin/', admin.site.urls),
+                  url(r'^', include('modules.landing.urls', namespace="landing")),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # Todas las posibles URL's del media
+#  se cargan en las URL's disponibles

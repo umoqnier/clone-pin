@@ -1,4 +1,7 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Images
+
 
 class SignupForm(forms.Form):
 
@@ -46,6 +49,7 @@ class SignupForm(forms.Form):
                 "password and confirm_password does not match"
             )
 
+
 class LoginForm(forms.Form):
     max_lenght = 30,
     username = forms.CharField(max_length=100, widget=forms.TextInput(
@@ -63,3 +67,20 @@ class LoginForm(forms.Form):
                 "placeholder":"password"
             }
             ))
+
+
+class ImageUploadForm(ModelForm):
+
+    class Meta:
+        model = Images
+        fields = ('descripcion', 'imagen')
+        widget = {
+            'descripcion': forms.Textarea(
+                attrs={
+                    'rows': 10,
+                    'cols': 15,
+                    'class': 'form-control',
+                    'placeholder': 'Escribe descripcion'
+                }
+            )
+        }
