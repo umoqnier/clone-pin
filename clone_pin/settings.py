@@ -78,7 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pin_db',
         'USER': 'pin_admin',
-        'PASSWORD':'pin2017',
+        'PASSWORD':'JorochoS',
         'HOST':'localhost',
         'PORT':'5432'
     }
@@ -123,3 +123,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(os.getcwd(),'static') ]
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = [os.path.join(os.getcwd(), 'media')]

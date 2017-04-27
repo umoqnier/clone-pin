@@ -1,17 +1,31 @@
 from django.shortcuts import render,redirect
-from .forms import SignupForm
+from .forms import SignupForm,LoginForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login as iniciar, logout as salir
 from django.http import HttpResponse
 # Create your views here.
+
 
 def index(request):
 
     return render(request, 'landing/index.html')
 
 
+def login(request):
+    form = LoginForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password']
+            )
+            if user is not None:
+                iniciar(request, user)  # Guarda en una cookie
+                return redirect('landing:index')
+            else:
+                return HttpResponse("Usuario no encontrado motherfucker")
 
-def login():
-    pass
+    return render(request,'landing/login.html', {"login":form})
 
 
 def signup(request):
@@ -26,10 +40,8 @@ def signup(request):
             return redirect("landing:index")
     
     return render(request,'landing/sign.html',{'sign':form})
-            
-    
 
 
-def logout():
-    pass
-
+def logout(request):
+    salir(request)
+    return redirect("landing:index")
