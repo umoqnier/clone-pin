@@ -3,10 +3,12 @@ from .forms import SignupForm, LoginForm, ImageUploadForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as iniciar, logout as salir
 from django.http import HttpResponse
+from .models import Images
 
 
 def index(request):
-    return render(request, 'landing/index.html')
+    images = Images.objects.order_by("-timestamp")
+    return render(request, 'landing/index.html', {'request': request, 'images': images})
 
 
 def login(request):
