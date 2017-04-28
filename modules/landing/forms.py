@@ -5,40 +5,33 @@ from .models import Images
 
 class SignupForm(forms.Form):
 
-    username = forms.CharField(max_length=100, widget=forms.TextInput(
-        attrs={
-            "class":"form-control",
-            "placeholder":"Username"
-        }
-    ))
-
     email = forms.EmailField(
         max_length=100,
         widget=forms.EmailInput(
             attrs={
-                "class":"form-control",
-                "placeholder":"email"
+                "class": "form-control",
+                "placeholder": "email"
             }
         ))
-    
-    password  = forms.CharField(
+
+    password = forms.CharField(
         max_length=100,
         widget=forms.PasswordInput(
             attrs={
-                "class":"form-control",
-                "placeholder":"password"
+                "class": "form-control",
+                "placeholder": "password"
             }
         ))
-    
-    confirm_password  = forms.CharField(
+
+    confirm_password = forms.CharField(
         max_length=100,
         widget=forms.PasswordInput(
             attrs={
-                "class":"form-control",
-                "placeholder":"confirm password"
+                "class": "form-control",
+                "placeholder": "confirm password"
             }
         ))
-        
+
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()
         password = cleaned_data.get("password")
@@ -51,26 +44,26 @@ class SignupForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    max_lenght = 30,
-    username = forms.CharField(max_length=100, widget=forms.TextInput(
-        attrs={
-            "class":"form-control",
-            "placeholder":"Username"
-            }
-            ))
-
-    password  = forms.CharField(
-            max_length=100,
-            widget=forms.PasswordInput(
+    email = forms.EmailField(
+        max_length=100,
+        widget=forms.EmailInput(
             attrs={
-                "class":"form-control",
-                "placeholder":"password"
+                "class": "form-control",
+                "placeholder": "email"
             }
-            ))
+        ))
+
+    password = forms.CharField(
+        max_length=100,
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "password"
+            }
+        ))
 
 
 class ImageUploadForm(ModelForm):
-
     class Meta:
         model = Images
         fields = ('descripcion', 'imagen')
